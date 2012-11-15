@@ -18,11 +18,12 @@ void kmain(struct multiboot *mboot, uintptr_t mboot_magic, uintptr_t esp);
 void 
 kmain(struct multiboot *mboot, uintptr_t mboot_magic, uintptr_t esp)
 {
-    int i;
+	int i;
     
     printk__init();
-    printk(INFO, "Booting....\n"); 
-   
+    printk(INFO, "Booting @ %u....\n",&mboot); 
+
+	
     printk(INFO, "Enabling serial\n");
     serial__init();
     
@@ -70,8 +71,8 @@ kmain(struct multiboot *mboot, uintptr_t mboot_magic, uintptr_t esp)
     printk(INFO, "Forcing page fault\n");
     uintptr_t *ptr = (uintptr_t *)0xA0000000;
     printk(INFO, "pfault %d\n", *ptr);
-#endif
-
+#endif    
+	
     while (1);
 }
 
